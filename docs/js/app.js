@@ -156,9 +156,36 @@ function cleanCodeMirror(container, pagePath) {
     if (basePath) {
       fragment = basePath + '/' + fragment;
     } else if (!PAGE_MAP[fragment]) {
-      // On home page, search PAGE_MAP for the full path (e.g. persiapan-komputer/1-instalasi...)
+      // On home page, search PAGE_MAP for the full path
+      var found = false;
       for (var key in PAGE_MAP) {
-        if (key.endsWith('/' + fragment)) { fragment = key; break; }
+        if (key.endsWith('/' + fragment)) { fragment = key; found = true; break; }
+      }
+      // If still not found (h4 TOC item), find the parent h3 page
+      if (!found) {
+        var item = a.closest('.md-toc-item');
+        if (item && item.classList.contains('md-toc-h4')) {
+          // Walk back to find the preceding h3 sibling
+          var prev = item.previousElementSibling;
+          while (prev) {
+            if (prev.classList.contains('md-toc-h3')) {
+              var parentLink = prev.querySelector('.md-toc-inner');
+              if (parentLink) {
+                var parentFrag = parentLink.getAttribute('href').slice(1).replace(/--/g, '-');
+                if (PAGE_MAP[parentFrag]) {
+                  fragment = parentFrag;
+                } else {
+                  // The h3 itself might be a sub-page — search for full path
+                  for (var k in PAGE_MAP) {
+                    if (k.endsWith('/' + parentFrag)) { fragment = k; break; }
+                  }
+                }
+              }
+              break;
+            }
+            prev = prev.previousElementSibling;
+          }
+        }
       }
     }
     a.setAttribute('href', '/llm-documentation/' + fragment);
