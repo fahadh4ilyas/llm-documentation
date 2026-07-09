@@ -161,7 +161,7 @@ function cleanCodeMirror(container, pagePath) {
         if (prev.classList.contains('md-toc-h3')) {
           var parentLink = prev.querySelector('.md-toc-inner');
           if (parentLink) {
-            var parentFrag = parentLink.getAttribute('href').slice(1).replace(/--/g, '-');
+            var parentFrag = parentLink.getAttribute('href').replace('/llm-documentation/', '').slice(1).replace(/--/g, '-');
             var pagePath = basePath ? basePath + '/' + parentFrag : parentFrag;
             if (!PAGE_MAP[pagePath]) {
               for (var k in PAGE_MAP) {
