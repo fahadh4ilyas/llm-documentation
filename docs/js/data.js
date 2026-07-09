@@ -4,7 +4,7 @@
 
 const NAVS = {
   empty: { url: [], text: '', class: '' },
-  'LLM-Documentation': { url: [''], text: 'LLM Documentation', class: 'ml-0' },
+  'llm-documentation': { url: [''], text: 'LLM Documentation', class: 'ml-0' },
   pendahuluan: { url: ['pendahuluan'], text: 'Pendahuluan', class: 'ml-3' },
   'spesifikasi-komputer': { url: ['spesifikasi-komputer'], text: 'Spesifikasi Komputer', class: 'ml-3' },
   'persiapan-komputer': { url: ['persiapan-komputer'], text: 'Persiapan Komputer', class: 'ml-3' },
@@ -32,16 +32,16 @@ const SIDENAVS = [
 
 const BOTTOMLINKS = {
   home: { left: NAVS.empty, center: NAVS.empty, right: NAVS.pendahuluan },
-  pendahuluan: { left: NAVS['LLM-Documentation'], center: NAVS['LLM-Documentation'], right: NAVS['spesifikasi-komputer'] },
-  'spesifikasi-komputer': { left: NAVS.pendahuluan, center: NAVS['LLM-Documentation'], right: NAVS['persiapan-komputer'] },
-  'persiapan-komputer': { left: NAVS['spesifikasi-komputer'], center: NAVS['LLM-Documentation'], right: NAVS['instalasi-nvidia-driver-cuda-toolkit'] },
-  '1-instalasi-nvidia-driver-cuda-toolkit': { left: NAVS['persiapan-komputer'], center: NAVS['LLM-Documentation'], right: NAVS['instalasi-docker-optional'] },
-  '2-instalasi-docker-optional': { left: NAVS['instalasi-nvidia-driver-cuda-toolkit'], center: NAVS['LLM-Documentation'], right: NAVS['instalasi-anaconda'] },
-  '3-instalasi-anaconda': { left: NAVS['instalasi-docker-optional'], center: NAVS['LLM-Documentation'], right: NAVS['proses-load-llm'] },
-  'proses-load-llm': { left: NAVS['instalasi-anaconda'], center: NAVS['LLM-Documentation'], right: NAVS['proses-inference-llm'] },
-  'proses-inference-llm': { left: NAVS['proses-load-llm'], center: NAVS['LLM-Documentation'], right: NAVS['deploy-dengan-vllm'] },
-  '1-deploy-dengan-vllm': { left: NAVS['proses-inference-llm'], center: NAVS['LLM-Documentation'], right: NAVS['interaksi-dengan-vllm'] },
-  '2-interaksi-dengan-vllm': { left: NAVS['deploy-dengan-vllm'], center: NAVS['LLM-Documentation'], right: NAVS.empty }
+  pendahuluan: { left: NAVS['llm-documentation'], center: NAVS['llm-documentation'], right: NAVS['spesifikasi-komputer'] },
+  'spesifikasi-komputer': { left: NAVS.pendahuluan, center: NAVS['llm-documentation'], right: NAVS['persiapan-komputer'] },
+  'persiapan-komputer': { left: NAVS['spesifikasi-komputer'], center: NAVS['llm-documentation'], right: NAVS['instalasi-nvidia-driver-cuda-toolkit'] },
+  '1-instalasi-nvidia-driver-cuda-toolkit': { left: NAVS['persiapan-komputer'], center: NAVS['llm-documentation'], right: NAVS['instalasi-docker-optional'] },
+  '2-instalasi-docker-optional': { left: NAVS['instalasi-nvidia-driver-cuda-toolkit'], center: NAVS['llm-documentation'], right: NAVS['instalasi-anaconda'] },
+  '3-instalasi-anaconda': { left: NAVS['instalasi-docker-optional'], center: NAVS['llm-documentation'], right: NAVS['proses-load-llm'] },
+  'proses-load-llm': { left: NAVS['instalasi-anaconda'], center: NAVS['llm-documentation'], right: NAVS['proses-inference-llm'] },
+  'proses-inference-llm': { left: NAVS['proses-load-llm'], center: NAVS['llm-documentation'], right: NAVS['deploy-dengan-vllm'] },
+  '1-deploy-dengan-vllm': { left: NAVS['proses-inference-llm'], center: NAVS['llm-documentation'], right: NAVS['interaksi-dengan-vllm'] },
+  '2-interaksi-dengan-vllm': { left: NAVS['deploy-dengan-vllm'], center: NAVS['llm-documentation'], right: NAVS.empty }
 };
 
 const PAGE_MAP = {
