@@ -13,8 +13,8 @@ function getRoute() {
     // Only treat as route if it starts with / — plain fragments are page anchors
     if (!hash.startsWith('/')) {
       // Fall through to pathname routing
-      if (window.location.pathname.startsWith('/llm-documentation/')) {
-        return window.location.pathname.slice('/llm-documentation/'.length).replace(/^\/?/, '') || '';
+      if (window.location.pathname.startsWith('/LLM-Documentation/')) {
+        return window.location.pathname.slice('/LLM-Documentation/'.length).replace(/^\/?/, '') || '';
       }
       return '';
     }
@@ -23,8 +23,8 @@ function getRoute() {
     return hash.replace(/^\/?/, '') || '';
   }
   // Path routing (direct visit or 404 redirect via clean URL)
-  if (window.location.pathname.startsWith('/llm-documentation/')) {
-    return window.location.pathname.slice('/llm-documentation/'.length).replace(/^\/?/, '') || '';
+  if (window.location.pathname.startsWith('/LLM-Documentation/')) {
+    return window.location.pathname.slice('/LLM-Documentation/'.length).replace(/^\/?/, '') || '';
   }
   return '';
 }
@@ -47,7 +47,7 @@ function getBreadcrumbKey(path) {
 }
 
 function getPagePath(path) {
-  return '/llm-documentation/' + (PAGE_MAP[path] || 'pages/404.html');
+  return '/LLM-Documentation/' + (PAGE_MAP[path] || 'pages/404.html');
 }
 
 /* ---- Sidebar ---- */
@@ -62,7 +62,7 @@ function renderSidebar(currentPath) {
     const isActive = currentPath === urlPath;
     const isSection = item.class === 'ml-3' && !/^\d/.test(item.text);
 
-    let href = '/llm-documentation/' + urlPath;
+    let href = '/LLM-Documentation/' + urlPath;
     if (item.fragment) href += '#' + item.fragment;
 
     let cls = '';
@@ -88,12 +88,12 @@ function renderBottomNav(path) {
   const mkLink = (item, side) => {
     if (!item || !item.url.length) return `<span class="bottom-link disabled invisible">—</span>`;
     const urlPath = item.url.join('/');
-    return `<a href="/llm-documentation/${urlPath}" class="bottom-link ${side}">${side === 'left' ? '← ' : ''}${item.text}${side === 'right' ? ' →' : ''}</a>`;
+    return `<a href="/LLM-Documentation/${urlPath}" class="bottom-link ${side}">${side === 'left' ? '← ' : ''}${item.text}${side === 'right' ? ' →' : ''}</a>`;
   };
 
   container.innerHTML = `
     ${mkLink(links.left, 'left')}
-    <a href="/llm-documentation/" class="bottom-link center">${links.center.text}</a>
+    <a href="/LLM-Documentation/" class="bottom-link center">${links.center.text}</a>
     ${mkLink(links.right, 'right')}
   `;
 }
@@ -129,8 +129,8 @@ function cleanCodeMirror(container, pagePath) {
     const fragment = a.getAttribute('fragment');
     const isAbsolute = link.startsWith('/');
 
-    // Strip /llm-documentation/ prefix if already present
-    link = link.replace(/^\/llm-documentation\//, '/');
+    // Strip /LLM-Documentation/ prefix if already present
+    link = link.replace(/^\/LLM-Documentation\//, '/');
 
     // Strip leading/trailing slashes
     link = link.replace(/^\/+|\/+$/g, '');
@@ -141,7 +141,7 @@ function cleanCodeMirror(container, pagePath) {
       link = basePath + '/' + link;
     }
 
-    let href = '/llm-documentation/' + link;
+    let href = '/LLM-Documentation/' + link;
     if (fragment) href += '#' + fragment;
     a.setAttribute('href', href);
     a.removeAttribute('routerLink');
@@ -156,7 +156,7 @@ function cleanCodeMirror(container, pagePath) {
     if (basePath) {
       fragment = basePath + '/' + fragment;
     }
-    a.setAttribute('href', '/llm-documentation/' + fragment);
+    a.setAttribute('href', '/LLM-Documentation/' + fragment);
   });
 }
 
@@ -188,7 +188,7 @@ async function loadPage(path) {
     contentEl.querySelectorAll('img[src]').forEach(function(img) {
       var src = img.getAttribute('src');
       if (src && src.indexOf('/') !== 0 && src.indexOf('http') !== 0) {
-        img.setAttribute('src', '/llm-documentation/' + src);
+        img.setAttribute('src', '/LLM-Documentation/' + src);
       }
     });
 
@@ -201,7 +201,7 @@ async function loadPage(path) {
     // Convert hash URL to clean URL after first load (from 404 redirect)
     var frag = getTargetFragment();
     if (window.location.hash && window.location.hash.startsWith('#/')) {
-      var clean = '/llm-documentation/' + path;
+      var clean = '/LLM-Documentation/' + path;
       if (frag) clean += '#' + frag;
       window.history.replaceState(null, '', clean);
     }
@@ -332,12 +332,12 @@ function handleNavClick(e) {
   var a = e.target.closest('a');
   if (!a) return;
   var href = a.getAttribute('href');
-  if (!href || !href.startsWith('/llm-documentation/')) return;
+  if (!href || !href.startsWith('/LLM-Documentation/')) return;
 
   e.preventDefault();
   // Extract path (without base prefix and hash fragment)
   var hashIdx = href.indexOf('#');
-  var path = (hashIdx === -1 ? href : href.substring(0, hashIdx)).replace('/llm-documentation/', '') || '';
+  var path = (hashIdx === -1 ? href : href.substring(0, hashIdx)).replace('/LLM-Documentation/', '') || '';
   var fragment = hashIdx !== -1 ? href.substring(hashIdx + 1) : null;
 
   // Same page — just scroll to fragment
