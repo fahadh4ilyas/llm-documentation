@@ -6,9 +6,9 @@
   <script>
     // Redirect 404 to root with path as hash
     // /llm-documentation/pendahuluan → /llm-documentation/#/pendahuluan
-    var segments = window.location.pathname.split('/');
-    var base = segments.slice(0, 2).join('/');
-    var rest = segments.slice(2).join('/');
+    var segments = window.location.pathname.split('/').filter(function(s) { return s !== ''; });
+    var base = '/' + segments[0];
+    var rest = segments.slice(1).join('/');
     window.location.replace(
       window.location.protocol + '//' + window.location.host +
       base + '/#/' + rest +
