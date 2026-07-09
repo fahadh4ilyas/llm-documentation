@@ -155,6 +155,11 @@ function cleanCodeMirror(container, pagePath) {
     // If on a section index page, prepend the section name
     if (basePath) {
       fragment = basePath + '/' + fragment;
+    } else if (!PAGE_MAP[fragment]) {
+      // On home page, search PAGE_MAP for the full path (e.g. persiapan-komputer/1-instalasi...)
+      for (var key in PAGE_MAP) {
+        if (key.endsWith('/' + fragment)) { fragment = key; break; }
+      }
     }
     a.setAttribute('href', '/llm-documentation/' + fragment);
   });
