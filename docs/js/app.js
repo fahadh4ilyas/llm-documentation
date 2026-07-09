@@ -338,11 +338,15 @@ function handleNavClick(e) {
   // Same page — just scroll to fragment
   if (path === currentPage && fragment) {
     window.history.pushState(null, '', href);
-    var el = document.getElementById(fragment) || document.querySelector('a[name="' + fragment + '"]');
-    if (el) {
-      var target = el.closest('h1,h2,h3,h4,h5,h6') || el;
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        var el = document.getElementById(fragment) || document.querySelector('a[name="' + fragment + '"]');
+        if (el) {
+          var target = el.closest('h1,h2,h3,h4,h5,h6') || el;
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
     return;
   }
 
