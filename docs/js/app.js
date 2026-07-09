@@ -41,8 +41,8 @@ function getTargetFragment() {
 function getBreadcrumbKey(path) {
   if (!path) return 'home';
   const parts = path.split('/');
-  if (parts[0] === 'menyiapkan-kubernetes' && parts[1]) return parts[1];
-  if (parts[0] === 'dasar-kubernetes' && parts[1]) return parts[1];
+  // Multi-level paths: use the last segment as the breadcrumb key
+  if (parts.length > 1) return parts[parts.length - 1];
   return parts[0];
 }
 
