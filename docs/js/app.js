@@ -152,40 +152,37 @@ function cleanCodeMirror(container, pagePath) {
     var href = a.getAttribute('href');
     if (!href || !href.startsWith('#')) return;
     var fragment = href.slice(1).replace(/--/g, '-');
-    // If on a section index page, prepend the section name
+
+    // h4 TOC items resolve to parent h3 page with fragment
+    var item = a.closest('.md-toc-item');
+    if (item && item.classList.contains('md-toc-h4')) {
+      var prev = item.previousElementSibling;
+      while (prev) {
+        if (prev.classList.contains('md-toc-h3')) {
+          var parentLink = prev.querySelector('.md-toc-inner');
+          if (parentLink) {
+            var parentFrag = parentLink.getAttribute('href').slice(1).replace(/--/g, '-');
+            var pagePath = basePath ? basePath + '/' + parentFrag : parentFrag;
+            if (!PAGE_MAP[pagePath]) {
+              for (var k in PAGE_MAP) {
+                if (k.endsWith('/' + parentFrag)) { pagePath = k; break; }
+              }
+            }
+            a.setAttribute('href', '/llm-documentation/' + pagePath + '#' + fragment);
+          }
+          break;
+        }
+        prev = prev.previousElementSibling;
+      }
+      return;
+    }
+
+    // h2/h3 TOC items
     if (basePath) {
       fragment = basePath + '/' + fragment;
     } else if (!PAGE_MAP[fragment]) {
-      // On home page, search PAGE_MAP for the full path
-      var found = false;
       for (var key in PAGE_MAP) {
-        if (key.endsWith('/' + fragment)) { fragment = key; found = true; break; }
-      }
-      // If still not found (h4 TOC item), find the parent h3 page
-      if (!found) {
-        var item = a.closest('.md-toc-item');
-        if (item && item.classList.contains('md-toc-h4')) {
-          // Walk back to find the preceding h3 sibling
-          var prev = item.previousElementSibling;
-          while (prev) {
-            if (prev.classList.contains('md-toc-h3')) {
-              var parentLink = prev.querySelector('.md-toc-inner');
-              if (parentLink) {
-                var parentFrag = parentLink.getAttribute('href').slice(1).replace(/--/g, '-');
-                if (PAGE_MAP[parentFrag]) {
-                  fragment = parentFrag;
-                } else {
-                  // The h3 itself might be a sub-page — search for full path
-                  for (var k in PAGE_MAP) {
-                    if (k.endsWith('/' + parentFrag)) { fragment = k; break; }
-                  }
-                }
-              }
-              break;
-            }
-            prev = prev.previousElementSibling;
-          }
-        }
+        if (key.endsWith('/' + fragment)) { fragment = key; break; }
       }
     }
     a.setAttribute('href', '/llm-documentation/' + fragment);
