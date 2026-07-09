@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting…</title>
+  <script>
+    // Redirect 404 to root with path as hash
+    // /llm-documentation/pendahuluan → /llm-documentation/#/pendahuluan
+    var segments = window.location.pathname.split('/');
+    var base = segments.slice(0, 2).join('/');
+    var rest = segments.slice(2).join('/');
+    window.location.replace(
+      window.location.protocol + '//' + window.location.host +
+      base + '/#/' + rest +
+      window.location.search +
+      window.location.hash
+    );
+  </script>
+</head>
+<body></body>
+</html>

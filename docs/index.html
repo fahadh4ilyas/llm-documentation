@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LLM Documentation — LLM Docs</title>
+  <meta name="description" content="Dokumentasi lengkap persiapan komputer untuk LLM: instalasi Nvidia Driver, Cuda Toolkit, Docker, load model, dan inference menggunakan vLLM.">
+  <meta name="keywords" content="LLM, dokumentasi, Nvidia Driver, Cuda Toolkit, Docker, vLLM, inference, load model, fine tune, Indonesia">
+  <meta name="author" content="Ahmad Fahadh Ilyas">
+  <link rel="icon" type="image/x-icon" href="/llm-documentation/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://challenges.cloudflare.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/llm-documentation/css/tailwind.min.css">
+  <link rel="stylesheet" href="/llm-documentation/css/theme.css">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+<body class="bg-gray-950 text-gray-300 font-sans antialiased flex flex-col min-h-screen">
+
+  <!-- Top navbar -->
+  <nav class="bg-gray-950 border-b border-violet-900/50 sticky top-0 z-50 h-12">
+    <div class="max-w-full mx-auto px-4 h-full flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <button id="sidebar-toggle" class="p-1 text-gray-400 hover:text-violet-400 transition-colors" aria-label="Toggle sidebar">
+          <svg id="sidebar-icon-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg id="sidebar-icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+        <a href="/llm-documentation/" class="font-mono font-bold text-violet-400 hover:text-violet-300 transition-colors text-sm">
+          ~/llm-docs
+        </a>
+      </div>
+      <a href="/" class="text-xs text-gray-600 hover:text-gray-400 font-mono transition-colors">
+        ~/fahadh
+      </a>
+      <button onclick="toggleTheme()" class="p-1 rounded text-gray-400 hover:text-violet-400 transition-colors" aria-label="Toggle theme">
+        <svg id="theme-icon-dark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+        </svg>
+        <svg id="theme-icon-light" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Layout -->
+  <div class="flex">
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar w-72 flex-shrink-0 bg-gray-950 border-r border-gray-800/50 h-[calc(100vh-48px)] sticky top-12 overflow-y-auto py-4 transition-all duration-200">
+      <!-- populated by app.js -->
+    </aside>
+
+    <!-- Main content -->
+    <main class="flex-1 min-w-0">
+      <div class="max-w-3xl mx-auto px-4 py-8">
+        <div id="content">
+          <!-- populated by app.js -->
+        </div>
+
+        <!-- Bottom nav -->
+        <div id="bottom-nav" class="mt-12 py-6 border-t border-gray-800 flex justify-between items-center gap-4">
+          <!-- populated by app.js -->
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-950 border-t border-violet-900/50 mt-auto">
+    <div class="max-w-4xl mx-auto px-4 py-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h5 class="font-mono font-bold text-violet-400 mb-3">~/llm-docs</h5>
+          <p class="text-gray-500 text-sm">LLM documentation in Bahasa Indonesia.</p>
+          <p class="text-gray-500 text-sm">Created by Ahmad Fahadh Ilyas.</p>
+        </div>
+        <div>
+          <h5 class="font-mono font-bold text-violet-400 mb-3">pages</h5>
+          <ul class="space-y-1 text-sm font-mono columns-2">
+            <li><a href="/llm-documentation/pendahuluan" class="text-gray-500 hover:text-violet-400 transition-colors">Pendahuluan</a></li>
+            <li><a href="/llm-documentation/spesifikasi-komputer" class="text-gray-500 hover:text-violet-400 transition-colors">Spesifikasi</a></li>
+            <li><a href="/llm-documentation/persiapan-komputer" class="text-gray-500 hover:text-violet-400 transition-colors">Persiapan</a></li>
+            <li><a href="/llm-documentation/proses-inference-llm" class="text-gray-500 hover:text-violet-400 transition-colors">Inference</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="font-mono font-bold text-violet-400 mb-3">fahadh</h5>
+          <ul class="space-y-1 text-sm font-mono">
+            <li><a href="/" class="text-gray-500 hover:text-violet-400 transition-colors">~/fahadh</a></li>
+            <li><a href="/llm-documentation/" class="text-gray-500 hover:text-violet-400 transition-colors">~/llm-docs</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-6 pt-4 border-t border-gray-800 text-center text-xs text-gray-600 font-mono">
+        built with <span class="text-violet-500">&hearts;</span> and help from <a href="https://deepseek.com" class="text-gray-500 hover:text-violet-400 transition-colors" target="_blank" rel="noopener">DeepSeek</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Contact FAB -->
+  <button id="contact-fab" class="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-violet-600 hover:bg-violet-500 border border-violet-400/30 text-white shadow-lg shadow-violet-900/50 hover:shadow-violet-700/50 transition-all flex items-center justify-center" aria-label="Open contact form" title="Contact">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+  </button>
+
+  <!-- Contact modal overlay -->
+  <div id="contact-overlay" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm items-center justify-center p-4" style="display:none;">
+    <div class="relative w-full max-w-md border border-gray-700 rounded-lg bg-gray-900 shadow-2xl shadow-violet-900/20">
+      <button id="contact-close" class="absolute top-3 right-3 text-gray-500 hover:text-violet-400 transition-colors" aria-label="Close">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <div class="p-6">
+        <h2 class="font-mono text-violet-400 text-lg mb-4">&gt; ./contact.sh</h2>
+        <form id="contact-form" action="https://script.google.com/macros/s/AKfycbxCaGnCDQWGk_B4g9egMt3FMwi_EseWhxwaONPrgWIG2o6TVtBD7HTRmx0crPH_28AU0g/exec" method="POST" class="space-y-4">
+          <div>
+            <label for="contact-email" class="block font-mono text-xs text-gray-500 mb-1.5">email</label>
+            <input type="email" id="contact-email" name="email" required placeholder="you@example.com" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Enter a valid email (e.g. you@example.com)" class="w-full bg-gray-950 border border-gray-700 rounded px-3 py-2 font-mono text-sm text-gray-300 placeholder-gray-600 focus:outline-none focus:border-violet-700 focus:ring-1 focus:ring-violet-500/30 transition-colors invalid:border-red-700">
+          </div>
+          <div>
+            <label for="contact-title" class="block font-mono text-xs text-gray-500 mb-1.5">title</label>
+            <input type="text" id="contact-title" name="title" required placeholder="subject line" class="w-full bg-gray-950 border border-gray-700 rounded px-3 py-2 font-mono text-sm text-gray-300 placeholder-gray-600 focus:outline-none focus:border-violet-700 focus:ring-1 focus:ring-violet-500/30 transition-colors">
+          </div>
+          <div>
+            <label for="contact-message" class="block font-mono text-xs text-gray-500 mb-1.5">message</label>
+            <textarea id="contact-message" name="message" required rows="4" placeholder="your message..." class="w-full bg-gray-950 border border-gray-700 rounded px-3 py-2 font-mono text-sm text-gray-300 placeholder-gray-600 focus:outline-none focus:border-violet-700 focus:ring-1 focus:ring-violet-500/30 transition-colors resize-none"></textarea>
+          </div>
+          <div style="position:absolute;left:-9999px" aria-hidden="true">
+            <input type="checkbox" name="_honey" value="1" tabindex="-1" autocomplete="off">
+          </div>
+          <div id="turnstile-widget" data-sitekey="0x4AAAAAADo8vPHeIGaZQCwF"></div>
+          <input type="hidden" name="load_time" id="load-time">
+          <button type="submit" id="contact-submit-btn" class="font-mono text-sm px-5 py-2 border border-violet-700 text-violet-400 rounded hover:bg-violet-950/50 hover:border-violet-500 transition-all focus:outline-none focus:ring-2 focus:ring-violet-500/30 disabled:opacity-50 disabled:cursor-not-allowed">
+            $ send
+          </button>
+        </form>
+        <p id="contact-result" class="mt-3 font-mono text-sm hidden"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="/llm-documentation/js/theme.js"></script>
+  <script src="/llm-documentation/js/data.js"></script>
+  <script src="/llm-documentation/js/app.js"></script>
+  <script>
+    // Contact modal toggle
+    (function() {
+      var fab = document.getElementById('contact-fab');
+      var overlay = document.getElementById('contact-overlay');
+      var close = document.getElementById('contact-close');
+      var widgetEl = document.getElementById('turnstile-widget');
+      var widgetId = null;
+      if (!fab || !overlay) return;
+
+      function openModal() {
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        if (widgetEl && typeof turnstile !== 'undefined') {
+          if (widgetId) {
+            turnstile.remove(widgetId);
+            widgetEl.innerHTML = '';
+          }
+          var theme = document.documentElement.getAttribute('data-theme') || 'light';
+          widgetId = turnstile.render(widgetEl, { sitekey: widgetEl.dataset.sitekey, theme: theme });
+        }
+      }
+      function closeModal() {
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+        if (widgetId && typeof turnstile !== 'undefined') turnstile.reset(widgetId);
+      }
+
+      fab.addEventListener('click', openModal);
+      close.addEventListener('click', closeModal);
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closeModal();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && overlay.style.display === 'flex') closeModal();
+      });
+
+      window.closeContactModal = closeModal;
+    })();
+
+    var lt = document.getElementById('load-time');
+    if (lt) lt.value = Date.now();
+
+    (function() {
+      var form = document.getElementById('contact-form');
+      var result = document.getElementById('contact-result');
+      var btn = document.getElementById('contact-submit-btn');
+      if (!form || !result) return;
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var token = (typeof turnstile !== 'undefined') ? turnstile.getResponse() : '';
+        if (!token) {
+          result.textContent = '=> please complete the captcha';
+          result.className = 'mt-3 font-mono text-sm text-red-400';
+          return;
+        }
+        btn.disabled = true;
+        btn.textContent = '$ sending...';
+        result.classList.add('hidden');
+        var data = new FormData(form);
+        data.append('cf-turnstile-response', token);
+        fetch(form.action, { method: 'POST', body: data })
+          .then(function(res) { return res.json(); })
+          .then(function(json) {
+            if (json.result === 'success') {
+              result.textContent = '=> success';
+              result.className = 'mt-3 font-mono text-sm text-green-400';
+              form.reset();
+              if (window.closeContactModal) window.closeContactModal();
+            } else {
+              result.textContent = '=> ' + (json.message || 'error');
+              result.className = 'mt-3 font-mono text-sm text-red-400';
+            }
+            result.classList.remove('hidden');
+          })
+          .catch(function() {
+            result.textContent = '=> network error';
+            result.className = 'mt-3 font-mono text-sm text-red-400';
+            result.classList.remove('hidden');
+          })
+          .finally(function() {
+            btn.disabled = false;
+            btn.textContent = '$ send';
+          });
+      });
+    })();
+  </script>
+</body>
+</html>
