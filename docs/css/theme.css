@@ -61,10 +61,10 @@
     #content ol { list-style-type: decimal; }
     #content li { margin-bottom: 0.25em; display: list-item; }
     #content img { max-width: 100%; border-radius: 4px; }
-    #content table { border-collapse: collapse; width: 100%; margin: 1em 0; table-layout: auto; }
+    #content table { border-collapse: collapse; margin: 1em 0; }
     #content figure { display: block; }
     #content .table-scroll { margin: 1em 0; }
-    #content th, #content td { border: 1px solid #374151; padding: 6px 10px; text-align: left; line-height: 1.5; word-break: break-word; }
+    #content th, #content td { border: 1px solid #374151; padding: 6px 10px; text-align: left; line-height: 1.5; }
     #content td code, #content th code { word-break: break-word; }
     #content th { background: #1f2937; color: #f3f4f6; font-weight: 600; }
     #content td { color: #d1d5db; }
