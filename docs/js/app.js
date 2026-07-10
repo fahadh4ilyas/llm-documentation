@@ -183,7 +183,7 @@ async function loadPage(path) {
       if (!table.parentElement.querySelector('.table-scroll')) {
         var wrapper = document.createElement('div');
         wrapper.className = 'table-scroll';
-        wrapper.style.cssText = 'overflow-x:auto;-webkit-overflow-scrolling:touch;';
+        wrapper.style.cssText = 'overflow-x:auto;-webkit-overflow-scrolling:touch;max-width:100%;';
         table.parentElement.insertBefore(wrapper, table);
         wrapper.appendChild(table);
       }
