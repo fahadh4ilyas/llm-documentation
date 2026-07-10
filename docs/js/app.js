@@ -178,6 +178,17 @@ async function loadPage(path) {
 
     contentEl.innerHTML = html;
 
+    // Wrap tables in scrollable containers for mobile
+    contentEl.querySelectorAll('figure table').forEach(function(table) {
+      if (!table.parentElement.querySelector('.table-scroll')) {
+        var wrapper = document.createElement('div');
+        wrapper.className = 'table-scroll';
+        wrapper.style.cssText = 'overflow-x:auto;-webkit-overflow-scrolling:touch;';
+        table.parentElement.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+      }
+    });
+
     // Fix relative asset URLs — with clean-path routing the base URL is
     // deeper than root, so assets/images/ would resolve incorrectly.
     contentEl.querySelectorAll('img[src]').forEach(function(img) {

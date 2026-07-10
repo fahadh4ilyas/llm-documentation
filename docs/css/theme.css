@@ -62,7 +62,8 @@
     #content li { margin-bottom: 0.25em; display: list-item; }
     #content img { max-width: 100%; border-radius: 4px; }
     #content table { border-collapse: collapse; width: 100%; margin: 1em 0; }
-    #content figure { display: block; overflow-x: auto; width: auto; max-width: 100%; }
+    #content figure { display: block; }
+    #content .table-scroll { margin: 1em 0; }
     #content th, #content td { border: 1px solid #374151; padding: 8px 12px; text-align: left; line-height: 1.6; min-width: 6rem; word-break: break-word; }
     #content td code, #content th code { word-break: break-word; }
     #content th { background: #1f2937; color: #f3f4f6; font-weight: 600; }
