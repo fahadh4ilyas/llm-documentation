@@ -111,9 +111,7 @@ function cleanCodeMirror(container, pagePath) {
         // Preserve cm-* spans for syntax highlighting
         var html = inner.innerHTML
           .replace(/&nbsp;/g, ' ')
-          .replace(/\u00A0/g, ' ')
-          .replace(/&lt;/g, '<')
-          .replace(/&gt;/g, '>');
+          .replace(/\u00A0/g, ' ');
         // Only trim truly empty lines (preserve indentation)
         if (!html.replace(/\s/g, '')) html = '';
         lines.push(html);
