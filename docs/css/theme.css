@@ -251,4 +251,11 @@
     [data-theme="light"] .cm-variable { color: #1e293b !important; }
     [data-theme="light"] .cm-atom     { color: #0369a1 !important; }
     [data-theme="light"] .cm-comment  { color: #94a3b8 !important; }
+
+    /* Copy button — light mode */
+    [data-theme="light"] .code-copy-btn {
+      background: #e2e8f0 !important;
+      color: #64748b !important;
+      border-color: #cbd5e1 !important;
+    }
   </style>
