@@ -112,11 +112,14 @@ function cleanCodeMirror(container, pagePath) {
         var html = inner.innerHTML
           .replace(/\u00A0/g, ' ')
           .replace(/&lt;/g, '<')
-          .replace(/&gt;/g, '>')
-          .trim();
+          .replace(/&gt;/g, '>');
+        // Only trim truly empty lines (preserve indentation)
+        if (!html.replace(/\s/g, '')) html = '';
         lines.push(html);
       } else {
-        lines.push((line.textContent || '').replace(/\u00A0/g, ' ').trim());
+        var text = (line.textContent || '').replace(/\u00A0/g, ' ');
+        if (!text.replace(/\s/g, '')) text = '';
+        lines.push(text);
       }
     });
     var cleaned = document.createElement('pre');
