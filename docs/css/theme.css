@@ -89,6 +89,25 @@
       padding: 1em;
       overflow-x: auto;
       margin: 1em 0;
+      position: relative;
+    }
+    #content .code-copy-btn {
+      position: absolute;
+      top: 0.5em;
+      right: 0.5em;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border: 1px solid #374151;
+      border-radius: 4px;
+      background: #1f2937;
+      color: #9ca3af;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    #content pre.code-block:hover .code-copy-btn { opacity: 1; }
+    #content pre.code-block {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.8125rem;
       line-height: 1.5;

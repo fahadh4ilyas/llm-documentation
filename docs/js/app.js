@@ -129,6 +129,18 @@ function cleanCodeMirror(container, pagePath) {
       return '<span class="code-line">' + (l || ' ') + '</span>';
     }).join('');
     cleaned.appendChild(code);
+    // Add copy button
+    var btn = document.createElement('button');
+    btn.className = 'code-copy-btn';
+    btn.textContent = 'copy';
+    btn.addEventListener('click', function() {
+      var text = code.textContent;
+      navigator.clipboard.writeText(text).then(function() {
+        btn.textContent = 'copied!';
+        setTimeout(function() { btn.textContent = 'copy'; }, 1500);
+      });
+    });
+    cleaned.appendChild(btn);
     pre.replaceWith(cleaned);
   });
 
