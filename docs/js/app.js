@@ -101,21 +101,26 @@ function renderBottomNav(path) {
 /* ---- CodeMirror Cleanup ---- */
 
 function cleanCodeMirror(container, pagePath) {
-  // Extract plain text from Typora CodeMirror blocks
+  // Preserve syntax highlighting from Typora CodeMirror blocks
   container.querySelectorAll('pre.md-fences').forEach(pre => {
-    const lang = pre.getAttribute('lang') || '';
-    const lines = [];
-    pre.querySelectorAll('.CodeMirror-line').forEach(line => {
-      const inner = line.querySelector('span[role="presentation"]');
-      let text = inner ? inner.textContent : line.textContent;
-      // Normalize non-breaking spaces, decode double-encoded entities
-      text = (text || '').replace(/\u00A0/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
-      lines.push(text);
+    var lang = pre.getAttribute('lang') || '';
+    var lines = [];
+    pre.querySelectorAll('.CodeMirror-line').forEach(function(line) {
+      var inner = line.querySelector('span[role="presentation"]');
+      if (inner) {
+        // Preserve cm-* spans for syntax highlighting
+        lines.push(inner.innerHTML
+          .replace(/\u00A0/g, ' ')
+          .replace(/&lt;/g, '<')
+          .replace(/&gt;/g, '>'));
+      } else {
+        lines.push((line.textContent || '').replace(/\u00A0/g, ' '));
+      }
     });
-    const cleaned = document.createElement('pre');
-    cleaned.className = `code-block${lang ? ' lang-' + lang : ''}`;
-    const code = document.createElement('code');
-    code.textContent = lines.join('\n');
+    var cleaned = document.createElement('pre');
+    cleaned.className = 'code-block' + (lang ? ' lang-' + lang : '');
+    var code = document.createElement('code');
+    code.innerHTML = lines.join('\n');
     cleaned.appendChild(code);
     pre.replaceWith(cleaned);
   });

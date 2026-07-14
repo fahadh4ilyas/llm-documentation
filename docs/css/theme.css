@@ -68,6 +68,19 @@
     #content td { color: #d1d5db; }
     #content th { background: #1f2937; color: #f3f4f6; font-weight: 600; }
 
+    /* Syntax highlighting — CodeMirror cm-* classes */
+    .cm-builtin  { color: #c084fc; }  /* purple — commands */
+    .cm-attribute { color: #fbbf24; } /* yellow — flags */
+    .cm-string   { color: #34d399; }  /* green — strings */
+    .cm-number   { color: #f87171; }  /* red — numbers */
+    .cm-keyword  { color: #60a5fa; }  /* blue — keywords */
+    .cm-def      { color: #f472b6; }  /* pink — definitions */
+    .cm-variable { color: #e2e8f0; }  /* light — variables */
+    .cm-operator { color: #94a3b8; }  /* grey — operators */
+    .cm-meta     { color: #94a3b8; }  /* grey — metadata */
+    .cm-atom     { color: #38bdf8; }  /* cyan — atoms */
+    .cm-comment  { color: #6b7280; }  /* dim — comments */
+
     /* Code blocks */
     #content pre.code-block {
       background: #111827;
@@ -207,4 +220,15 @@
     [data-theme="light"] .focus\:ring-violet-500\/30:focus { --tw-ring-color: rgba(139,92,246,0.2) !important; }
     [data-theme="light"] .invalid\:border-red-700:invalid { border-color: #dc2626 !important; }
     [data-theme="light"] .text-red-400 { color: #dc2626 !important; }
+
+    /* Syntax highlighting — light mode */
+    [data-theme="light"] .cm-builtin  { color: #7c3aed !important; }
+    [data-theme="light"] .cm-attribute { color: #b45309 !important; }
+    [data-theme="light"] .cm-string   { color: #059669 !important; }
+    [data-theme="light"] .cm-number   { color: #dc2626 !important; }
+    [data-theme="light"] .cm-keyword  { color: #1d4ed8 !important; }
+    [data-theme="light"] .cm-def      { color: #be185d !important; }
+    [data-theme="light"] .cm-variable { color: #1e293b !important; }
+    [data-theme="light"] .cm-atom     { color: #0369a1 !important; }
+    [data-theme="light"] .cm-comment  { color: #94a3b8 !important; }
   </style>
