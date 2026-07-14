@@ -110,6 +110,7 @@ function cleanCodeMirror(container, pagePath) {
       if (inner) {
         // Preserve cm-* spans for syntax highlighting
         var html = inner.innerHTML
+          .replace(/&nbsp;/g, ' ')
           .replace(/\u00A0/g, ' ')
           .replace(/&lt;/g, '<')
           .replace(/&gt;/g, '>');
@@ -135,7 +136,7 @@ function cleanCodeMirror(container, pagePath) {
     btn.textContent = 'copy';
     btn.addEventListener('click', function() {
       var text = Array.from(code.querySelectorAll('.code-line')).map(function(s) {
-        return s.textContent;
+        return s.textContent.replace(/\u00A0/g, ' ');
       }).join('\n');
       navigator.clipboard.writeText(text).then(function() {
         btn.textContent = 'copied!';
