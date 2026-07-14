@@ -134,7 +134,9 @@ function cleanCodeMirror(container, pagePath) {
     btn.className = 'code-copy-btn';
     btn.textContent = 'copy';
     btn.addEventListener('click', function() {
-      var text = code.textContent;
+      var text = Array.from(code.querySelectorAll('.code-line')).map(function(s) {
+        return s.textContent;
+      }).join('\n');
       navigator.clipboard.writeText(text).then(function() {
         btn.textContent = 'copied!';
         setTimeout(function() { btn.textContent = 'copy'; }, 1500);
