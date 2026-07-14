@@ -125,7 +125,9 @@ function cleanCodeMirror(container, pagePath) {
     var cleaned = document.createElement('pre');
     cleaned.className = 'code-block' + (lang ? ' lang-' + lang : '');
     var code = document.createElement('code');
-    code.innerHTML = lines.join('\n');
+    code.innerHTML = lines.map(function(l) {
+      return '<span class="code-line">' + (l || ' ') + '</span>';
+    }).join('');
     cleaned.appendChild(code);
     pre.replaceWith(cleaned);
   });

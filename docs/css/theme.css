@@ -94,6 +94,7 @@
       line-height: 1.5;
     }
     #content pre.code-block code { color: #e5e7eb; background: none; padding: 0; white-space: pre-wrap; }
+    #content .code-line { display: block; }
     #content code {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.8125rem;
