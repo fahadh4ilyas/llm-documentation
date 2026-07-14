@@ -109,12 +109,14 @@ function cleanCodeMirror(container, pagePath) {
       var inner = line.querySelector('span[role="presentation"]');
       if (inner) {
         // Preserve cm-* spans for syntax highlighting
-        lines.push(inner.innerHTML
+        var html = inner.innerHTML
           .replace(/\u00A0/g, ' ')
           .replace(/&lt;/g, '<')
-          .replace(/&gt;/g, '>'));
+          .replace(/&gt;/g, '>')
+          .trim();
+        lines.push(html);
       } else {
-        lines.push((line.textContent || '').replace(/\u00A0/g, ' '));
+        lines.push((line.textContent || '').replace(/\u00A0/g, ' ').trim());
       }
     });
     var cleaned = document.createElement('pre');
